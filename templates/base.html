@@ -1,0 +1,41 @@
+{% block explorer %}
+
+<table style="width:100%">
+	<tr>
+		<th><a href="{{ url_for('home')}}">Home</a></th>
+		<th><a href = "{{ url_for('all_names') }}">Names</a></th>
+		<th><a href = "{{ url_for('all_recipes') }}">Recipes</a></th>
+		<th><a href = "{{ url_for('searcher') }}">Search</a></th>
+	</tr>
+</table>
+
+{% endblock %}
+
+{% block content %}
+
+<h3> Enter Name </h3>
+
+<form action="{{ url_for('home') }}" method="POST">
+	{{ form.csrf_token }}
+    {{ form.name.label() }}{{ form.name() }}<br>
+    {{ form.submit() }}
+
+</form>
+
+<h3> Enter Recipe </h3>
+
+<form action="{{ url_for('home') }}" method="POST">
+	{{ form2.csrf_token }}
+    {{ form2.name.label() }}{{ form2.name() }}<br>
+    {{ form2.title.label() }}{{ form2.title() }}<br>
+    {{ form2.recipe.label() }}{{ form2.recipe() }}<br>
+    {{ form2.submit() }}
+</form>
+
+<body>
+	<a href = "/all_recipes.html">
+	<a href = "/my_recipes.html">
+</body>
+
+
+{% endblock %}

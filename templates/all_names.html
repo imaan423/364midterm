@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block explorer %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+
+<h2>Names Visited</h2>
+
+{% for n in names %}
+    <p>{{ n }}</p>
+{% endfor %}
+
+{% if not names %}
+    There are no names to show. 
+{% endif %}
+
+
+{% endblock %}

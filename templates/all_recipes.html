@@ -1,0 +1,35 @@
+
+{% extends "base.html" %}
+
+{% block explorer %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<h2>All Recipes</h2>
+{% for r in allrecipes %}
+{% set ingr = r['recipe'].split(',') %}
+    <p> 
+    	<h3>{{ r['name_of_dish'] }} </h3>
+    	Ingredients:
+    	{% for i in ingr %}
+    	<li>{{ i }}</li>
+    	{% endfor %}
+    	<i>created by</i> <strong>@{{ r['username'] }}</strong>
+	</p>
+	<br>
+
+{% endfor %}
+
+{% if not allrecipes %}
+    There are no recipes to show. 
+{% endif %}
+
+
+<div>
+{% for message in get_flashed_messages() %}
+    <strong>*** {{ message }} ***</strong>
+{% endfor %}
+</div>
+
+{% endblock %}

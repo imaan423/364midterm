@@ -1,0 +1,83 @@
+
+{% extends "base.html" %}
+
+{% block explorer %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+
+<h2>Search for a recipe!</h2>
+<form action="{{ url_for('searcher') }}" method="POST">
+	{{ form.csrf_token }}
+	{{ form.query.label }} {{ form.query() }}
+	{{ form.submit() }}
+</form>
+
+{% if searched %}
+
+
+{% for r in results %}
+{% set ingr = r['recipe'].split(',') %}
+    <p> <h4>{{ r['name_of_dish'] }} </h4>
+    	Ingredients:
+    	{% for i in ingr %}
+    	<li>{{ i }}</li>
+    	{% endfor %}
+    	<i>created by</i> <strong>@{{ r['username'] }}</strong>
+	</p>
+	<br>
+
+{% endfor %}
+
+
+{% if not results %}
+No results in our databases, but here are similar recipes from <a href="www.edamam.com">Edamam</a>!
+
+{% for c in context %}
+
+<p>
+	<h3><a href="{{ c['url'] }}">{{ c['label'] }}</a></h3>
+	Ingredients:
+	{% for i in c['ingredients'] %}
+	<li>{{ i['text'] }}</li>
+	{% endfor %}
+</p>
+
+{% endfor %}
+
+{% endif %} <!-- if for no results -->
+
+{% endif %} <!-- if for not searched yet -->
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
