@@ -21,10 +21,11 @@ app = Flask(__name__)
 app.debug = True
 
 ## All app.config values
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://localhost/imunir364midterm"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DATABASE_URL') or "postgresql://localhost/imunir364midterm"
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'hard to guess string from si364'
+app.config['HEROKU_ON'] = os.environ.get('HEROKU')
 
 
 ## Statements for db setup (and manager setup if using Manager)
